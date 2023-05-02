@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
+    [SerializeField] private Transform woodHarvesterObject; 
     private Camera mainCamera;
-    [SerializeField] private Transform mouseVisualTransform;
 
     private void Start()
     {
@@ -12,7 +12,10 @@ public class BuildingManager : MonoBehaviour
     
     private void Update()
     {
-        mouseVisualTransform.position = getMouseWorldPosition();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(woodHarvesterObject, getMouseWorldPosition(), Quaternion.identity);
+        }
     }
 
     private Vector3 getMouseWorldPosition()
