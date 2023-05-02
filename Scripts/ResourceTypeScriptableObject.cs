@@ -4,4 +4,5 @@ using UnityEngine;
 public class ResourceTypeScriptableObject : ScriptableObject
 {
     public string nameString;
+    public Sprite sprite; 
 }
