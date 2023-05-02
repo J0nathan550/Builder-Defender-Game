@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
+    public static ResourceManager Instance { get; private set; }
+
     private Dictionary<ResourceTypeScriptableObject, int> resourceAmountDictionary = new Dictionary<ResourceTypeScriptableObject, int>();
     private void Awake()
     {
@@ -12,16 +14,7 @@ public class ResourceManager : MonoBehaviour
             resourceAmountDictionary[resourceType] = 0; 
         }
         TestLogAmountDictionary();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ResourceTypeListScriptableObject resourceTypeList = Resources.Load<ResourceTypeListScriptableObject>(typeof(ResourceTypeListScriptableObject).Name);
-            AddResource(resourceTypeList.list[0], 2);
-            TestLogAmountDictionary();
-        }
+        Instance = this;
     }
 
     private void TestLogAmountDictionary()
@@ -35,5 +28,6 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(ResourceTypeScriptableObject resourceType, int amount)
     {
         resourceAmountDictionary[resourceType] += amount;
+        TestLogAmountDictionary();
     }
 }
